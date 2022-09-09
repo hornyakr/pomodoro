@@ -14,13 +14,18 @@ const goalsSlice = createSlice({
   name: "goals",
   initialState,
   reducers: {
+    goalsById: (state, action) => {
+      const states = JSON.parse(localStorage.getItem("goals"));
+      const newGoals = states.filter((x) => x.userId === action.payload);
+      return newGoals;
+    },
     removeGoals: (state) => {
       return [];
     },
   },
 });
 
-export const { removeGoals } = goalsSlice.actions;
+export const { removeGoals, goalsById } = goalsSlice.actions;
 
 export const myGoals = (state) => state.goals;
 

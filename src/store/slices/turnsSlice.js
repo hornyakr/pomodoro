@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { turns } from "../../data/data";
 
 const initialState = [];
@@ -14,6 +14,18 @@ const turnsSlice = createSlice({
   name: "turns",
   initialState,
   reducers: {
+    turnsByIds: (state, action) => {
+      if (current(state).length < 1) {
+        const states = JSON.parse(localStorage.getItem("turns"));
+        const newTurns = [];
+        action.payload.forEach((id) =>
+          states.forEach((turn) => {
+            if (turn.taskId === id) newTurns.push(turn);
+          })
+        );
+        return newTurns;
+      }
+    },
     removeTurns: (state) => {
       return [];
     },
