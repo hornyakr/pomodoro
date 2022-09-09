@@ -108,3 +108,85 @@ export default function MainNav() {
     </Navbar>
   );
 }
+/* <nav className="navbar navbar-expand-lg bg-dark bg-gradient">
+      <div className="container">
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo03"
+          aria-controls="navbarTogglerDemo03"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <Link className="navbar-brand d-flex align-items-center me-5" to="/">
+          <img src="/tomato.png" alt="Logó" width="50" />
+          <span className="text-white fs-2 ms-3">Pomodoro</span>
+        </Link>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <li className="nav-item me-3">
+              <Link to="/" className="text-decoration-none text-white">
+                Főoldal
+              </Link>
+            </li>
+            <li className="nav-item me-3">
+              <Link
+                to="/users/profile"
+                className="text-decoration-none text-white"
+              >
+                Felhasználók
+              </Link>
+            </li>
+          </ul>
+          <ul className="navbar-nav ms-auto">
+            {user ? (
+              <div className="d-flex flex-column align-items-end">
+                <span className="text-white">Üdv {user.firstName}!</span>
+                <button
+                  onClick={signOutHandler}
+                  className="bg-transparent border-0 text-primary p-0"
+                >
+                  Kijelentkezés
+                </button>
+              </div>
+            ) : (
+              <>
+                <button
+                  id="loginButton"
+                  type="button"
+                  className="btn btn-outline-primary"
+                  onClick={() =>
+                    showLogin ? setshowLogin(false) : setshowLogin(true)
+                  }
+                >
+                  Bejelentkezés
+                </button>
+                <button
+                  id="registerButton"
+                  type="button"
+                  className="btn btn-primary ms-3"
+                  onClick={() =>
+                    showRegistration
+                      ? setshowRegistration(false)
+                      : setshowRegistration(true)
+                  }
+                >
+                  Regisztráció
+                </button>
+              </>
+            )}
+          </ul>
+        </div>
+      </div>
+      <Login
+        changeShow={(showLogin) => setshowLogin(showLogin)}
+        show={showLogin}
+      />
+      <Registration
+        changeShow={(showRegistration) => setshowRegistration(showRegistration)}
+        show={showRegistration}
+      />
+    </nav> */

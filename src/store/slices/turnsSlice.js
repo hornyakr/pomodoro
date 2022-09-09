@@ -31,6 +31,14 @@ const turnsSlice = createSlice({
         Date().toString();
       localStorage.setItem("turns", JSON.stringify(state));
     },
+    addTurn: (state, action) => {
+      const ids = current(state).map((turn) => turn.id);
+      const newTurn = action.payload;
+      newTurn.id = ids.map((id) => id).length === 0 ? 1 : Math.max(...ids) + 1;
+      const localTurns = JSON.parse(localStorage.getItem("turns"));
+      localStorage.setItem("turns", JSON.stringify(localTurns.concat(newTurn)));
+      return state.concat(newTurn);
+    },
     removeTurns: (state) => {
       return [];
     },
