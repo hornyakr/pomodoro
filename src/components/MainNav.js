@@ -1,15 +1,29 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { logedIn, signOut } from "../store/slices/userSlice";
 import Login from "./Login";
 import Registration from "./Registration";
+import { useDispatch } from "react-redux";
+import { removeGoals } from "../store/slices/goalsSlice";
+import { removeTasks } from "../store/slices/tasksSlice";
+import { removeTurns } from "../store/slices/turnsSlice";
 import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 
 export default function MainNav() {
   const expand = "md";
+  const dispatch = useDispatch();
+  const user = useSelector(logedIn);
 
   const [showLogin, setshowLogin] = useState(false);
   const [showRegistration, setshowRegistration] = useState(false);
 
+  const signOutHandler = () => {
+    dispatch(signOut());
+    dispatch(removeGoals());
+    dispatch(removeTasks());
+    dispatch(removeTurns());
+  };
   return (
     <Navbar
       key={expand}
@@ -44,30 +58,42 @@ export default function MainNav() {
                 Felhasználók
               </Nav.Link>
             </Nav>
-            <div className="mt-4 m-md-0">
-              <button
-                id="loginButton"
-                type="button"
-                className="btn btn-outline-primary"
-                onClick={() =>
-                  showLogin ? setshowLogin(false) : setshowLogin(true)
-                }
-              >
-                Bejelentkezés
-              </button>
-              <button
-                id="registerButton"
-                type="button"
-                className="btn btn-primary ms-3"
-                onClick={() =>
-                  showRegistration
-                    ? setshowRegistration(false)
-                    : setshowRegistration(true)
-                }
-              >
-                Regisztráció
-              </button>
-            </div>
+            {user ? (
+              <div className="d-flex flex-column align-items-end">
+                <span className="text-white">Üdv {user.firstName}!</span>
+                <button
+                  onClick={signOutHandler}
+                  className="bg-transparent border-0 text-primary p-0"
+                >
+                  Kijelentkezés
+                </button>
+              </div>
+            ) : (
+              <div className="mt-4 m-md-0">
+                <button
+                  id="loginButton"
+                  type="button"
+                  className="btn btn-outline-primary"
+                  onClick={() =>
+                    showLogin ? setshowLogin(false) : setshowLogin(true)
+                  }
+                >
+                  Bejelentkezés
+                </button>
+                <button
+                  id="registerButton"
+                  type="button"
+                  className="btn btn-primary ms-3"
+                  onClick={() =>
+                    showRegistration
+                      ? setshowRegistration(false)
+                      : setshowRegistration(true)
+                  }
+                >
+                  Regisztráció
+                </button>
+              </div>
+            )}
           </Offcanvas.Body>
         </Navbar.Offcanvas>
       </Container>

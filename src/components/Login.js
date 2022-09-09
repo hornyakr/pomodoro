@@ -1,7 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Offcanvas } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { logedIn, signIn } from "../store/slices/userSlice";
 
 export default function Login(props) {
+  const dispatch = useDispatch();
+  const user = useSelector(logedIn);
+
   const { show, changeShow } = props;
 
   const [email, setemail] = useState("");
@@ -13,8 +18,17 @@ export default function Login(props) {
     changeShow(false);
   }
 
+  useEffect(() => {
+    if (user) {
+      changeShow(false);
+    }
+  }, [user, changeShow]);
+
   const submitHandler = (e) => {
     e.preventDefault();
+    dispatch(
+      signIn({ email: email, password: password, stayLogged: stayLogged })
+    );
   };
 
   return (

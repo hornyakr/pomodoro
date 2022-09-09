@@ -13,7 +13,15 @@ if (
 const tasksSlice = createSlice({
   name: "tasks",
   initialState,
-  reducers: {},
+  reducers: {
+    removeTasks: (state) => {
+      return [];
+    },
+  },
 });
+
+export const { removeTasks } = tasksSlice.actions;
+
+export const myTasks = (state) => state.tasks;
 
 export default tasksSlice.reducer;

@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Offcanvas } from "react-bootstrap";
+import { useDispatch } from "react-redux";
 import FelhasznaloiFeltetelekModal from "./FelhasznaloiFeltetelekModal";
+import { addUser } from "../store/slices/usersSlice";
+import { signIn } from "../store/slices/userSlice";
 
 export default function Registration(props) {
+  const dispatch = useDispatch();
+
   const { show, changeShow } = props;
   const [modalShow, setModalShow] = useState(false);
 
@@ -19,6 +24,20 @@ export default function Registration(props) {
 
   const submitHandler = (e) => {
     e.preventDefault();
+    password !== comfirmPassword
+      ? alert("A jelszó nem egyezik!")
+      : dispatch(
+          addUser({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+          })
+        ) &&
+        dispatch(
+          signIn({ email: email, password: password, stayLogged: true })
+        ) &&
+        changeShow(false);
   };
   return (
     <>

@@ -13,7 +13,15 @@ if (
 const goalsSlice = createSlice({
   name: "goals",
   initialState,
-  reducers: {},
+  reducers: {
+    removeGoals: (state) => {
+      return [];
+    },
+  },
 });
+
+export const { removeGoals } = goalsSlice.actions;
+
+export const myGoals = (state) => state.goals;
 
 export default goalsSlice.reducer;

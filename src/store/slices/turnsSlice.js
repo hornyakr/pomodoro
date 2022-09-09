@@ -13,7 +13,16 @@ if (
 const turnsSlice = createSlice({
   name: "turns",
   initialState,
-  reducers: {},
+  reducers: {
+    removeTurns: (state) => {
+      return [];
+    },
+  },
 });
+
+export const { turnsByIds, removeTurns, finishTurn, addTurn } =
+  turnsSlice.actions;
+
+export const myTurns = (state) => state.turns;
 
 export default turnsSlice.reducer;
