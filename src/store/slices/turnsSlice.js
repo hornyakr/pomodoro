@@ -26,6 +26,11 @@ const turnsSlice = createSlice({
         return newTurns;
       }
     },
+    finishTurn: (state, action) => {
+      state.find((turn) => turn.id === action.payload).finishAt =
+        Date().toString();
+      localStorage.setItem("turns", JSON.stringify(state));
+    },
     removeTurns: (state) => {
       return [];
     },
